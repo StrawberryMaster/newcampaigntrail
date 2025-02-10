@@ -80,7 +80,11 @@ function dHondtAllocation(votes, seats, thresh = 0.15) {
 
 var states = []
 var initIt=0
-window.setInterval(function(){campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter(n => n)},200) // eye roll goes here -> modders are stupid
+window.setInterval(function() {
+    if (Array.isArray(campaignTrail_temp.candidate_json)) {
+        campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter(n => n);
+    }
+}, 200);
 var fileExists = function(url) {
     var req = new XMLHttpRequest();
     req.open('GET', url, false);
