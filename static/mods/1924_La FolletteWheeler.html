@@ -2652,7 +2652,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 105,
             "issue": 14,
-            "state_issue_score": -0.6,
+            "state_issue_score": 0.6,
             "weight": 1
         }
     },
@@ -22720,6 +22720,8 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://itsastronomical.com/assets/1924/advice/bobadvice.png";
+
 // Sets the Republicans as "Warren Harding" before he dies, likewise with the Democrats being named after their party before the 1924 DNC
 
 campaignTrail_temp.candidate_json[0]["fields"].first_name = "Warren G.";
@@ -22820,17 +22822,12 @@ var brand = false;
 
 // Achievement Variables
 var noparty = false;
+var mol = false;
+var rip = false;
 
 // This is where the actual CYOA code really is
 
 cyoAdventure = function (a) {
-
-  // Achievement Check
-  if(ans == 1683 && ans == 1776){
-    ctsAchievement("Molotov-Ribbentrop Pact");
-  }
-
-
     // This just makes the code look neater
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
     
@@ -22845,6 +22842,17 @@ cyoAdventure = function (a) {
     campaignTrail_temp.candidate_json[1]["fields"].first_name = "John W.";
     campaignTrail_temp.candidate_json[1]["fields"].last_name = "Davis";
   }
+
+  // Achievement Check
+    if (ans == 1683) {
+        rip = true;
+    }
+    if (ans == 1776) {
+        mol = true;
+    }
+    if(mol == true && rip == true){
+        ctsAchievement("Molotov-Ribbentrop Pact");
+    }
 
 // Boolean checks
   if (ans == 1777 || ans == 1778 || ans == 11202) {
@@ -23512,7 +23520,9 @@ if (quickstats[0] >= 266) {
 
 // La Follette Wins
 if (quickstats[0] >= 266) {
-  e.pages.push(`<h3>'The will of the people shall be the law of the land'</h3><p>For your whole career, you have pushed for progressive policies, no matter how much ire it brought you from your political opponent. Tonight's stunning result is a vindication of yourself and everything you have fought for. You aren't even sure how long you shall be in office for, given your health, but you know that you shall push for bold and great reform.<br><br>Days, perhaps weeks pass as you wait for Coolidge to telegram you a concession. Eventually he does so. He also asks that you prepare yourself to enter the White House. You're pushing for your son to be appointed to your soon-to-be vacated Senate seat, as you begin preparations to form a cabinet. Here's to hoping you can make it through all four years, and that this independence from the duopoly is here to stay!</p>`)
+  ctsAchievement("Fighting Bob");
+  e.pages.push(`<h3>'The will of the people shall be the law of the land'</h3><p>For your whole career, you have pushed for progressive policies, no matter how much ire it brought you from your political opponents. Tonight's stunning result is a vindication of yourself and everything you have fought for. You aren't even sure how long you shall be in office for, given your health, but you know that you shall push for bold and great reform.<br><br>Days, perhaps weeks pass as you wait for Coolidge to telegram you a concession. Eventually he does so. He also asks that you prepare yourself to enter the White House. You're pushing for your son to be appointed to your soon-to-be vacated Senate seat, as you begin preparations to form a cabinet. Here's to hoping you can make it through all four years, and that this independence from the duopoly is here to stay!</p>`)
+  success = true;
   e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobwin.png'})])
 }
 
