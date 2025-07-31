@@ -1677,6 +1677,15 @@
       "image": "/static/mod_icons/2000.png"
     },
     {
+      "label": "2000: Goredux",
+      "value": "2000Redux",
+      "tags": [
+        "historical",
+        "recent"
+      ],
+      "image": "/static/mod_icons/gore.png"
+    },
+    {
       "label": "2001 Australia",
       "value": "2001 Aus",
       "tags": [
@@ -2078,6 +2087,14 @@
         "althist"
       ],
       "image": "/static/mod_icons/2016ARNOLD.png"
+    },
+    {
+      "label": "Class War: 2016",
+      "value": "2016ClassWar",
+      "tags": [
+        "althist",
+        "recent"
+      ]
     },
     {
       "label": "2016 Koopa",
