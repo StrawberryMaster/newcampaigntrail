@@ -3843,14 +3843,34 @@ document.addEventListener('keydown', function(event) {
     }
 
 });
-
-fix1964= window.setInterval(function(){
-    try{
-    if (document.getElementById("election_id").value==69) {
-        windowT = document.getElementById("inner_window_2")
-        windowT.children[windowT.children.length-1].innerHTML= "This scenario was made by Tex."
-    } else if (document.getElementById("election_id").value>-1 && !modded) {
-        windowT.children[windowT.children.length-1].innerHTML= "This scenario was made by Dan Bryan."
+const fix1964 = () => {
+    const electionSelect = document.querySelector("#election_id");
+    const electionId = Number(electionSelect.value);
+    const credits = document.querySelector("#credits");
+    if (electionId === 69) {
+        credits.innerHTML = "This scenario was made by Tex.";
+    } else if (electionId > -1 && !modded) {
+        credits.innerHTML = "This scenario was made by Dan Bryan.";
     }
-}catch{}
-},100)
+};
+
+const fix1964Observer = new MutationObserver((mut, obs) => {
+    const newElectSelect = document.querySelector("#election_id");
+    if (newElectSelect && newElectSelect !== curElectSelect) {
+        if (curElectSelect) {
+            curElectSelect.removeEventListener("change", fix1964);
+        }
+        curElectSelect = newElectSelect;
+        curElectSelect.addEventListener("change", fix1964);
+        fix1964();
+    }
+    if (document.querySelector(".inner_window_question")) {
+        e.code2Loaded = true;
+        obs.disconnect();
+    }
+});
+
+fix1964Observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+});

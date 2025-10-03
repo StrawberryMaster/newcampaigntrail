@@ -1,4 +1,7 @@
-e = campaignTrail_temp
+// ensure campaignTrail_temp exists before any other script references it
+window.campaignTrail_temp = window.campaignTrail_temp || {};
+var campaignTrail_temp = window.campaignTrail_temp;
+var e = campaignTrail_temp
 
 const yearField = document.getElementById("year")
 yearField.innerHTML = new Date().getFullYear()
@@ -532,6 +535,12 @@ if (theme == null) {
     nct_stuff.selectedTheme = "nct"
 } else {
     nct_stuff.selectedTheme = theme
+}
+
+// ensure the selectedTheme key actually exists in the themes map
+// if the stored value is invalid/removed, fall back to the default theme key
+if (!nct_stuff.themes.hasOwnProperty(nct_stuff.selectedTheme)) {
+    nct_stuff.selectedTheme = "nct";
 }
 
 var selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
