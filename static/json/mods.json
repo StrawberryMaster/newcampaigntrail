@@ -2116,6 +2116,16 @@
       "tags": [
         "althist"
       ]
+    }, 
+    {
+      "label": "2014 Kansas Gubernatorial Election",
+      "value": "2014 Kansas Gubernatorial Election",
+      "tags": [
+        "historical",
+        "state",
+        "recent"
+      ],
+      "image": "/static/mod_icons/2014KS.jpg"
     },
     {
       "label": "2015 Denmark",
@@ -2621,7 +2631,7 @@
         "historical",
         "recent"
       ],
-      "image": "/static/mod_icons/sunset.jpeg"
+      "image": "/static/mod_icons/sunset.jpg"
     },
     {
       "label": "The Divorce Trail: Astro v. Luuwuu (2023 April Fools Day)",
