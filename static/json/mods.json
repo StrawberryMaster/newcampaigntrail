@@ -2659,11 +2659,20 @@
       "image": "/static/mod_icons/2025Canada.jpg"
     },
     {
-      "label": "2025 Netherlands",
-      "value": "2025NL",
+      "label": "2025a Netherlands",
+      "value": "2025aNL",
       "tags": [
         "althist",
         "international"
+      ]
+    },
+    {
+      "label": "2025 Netherlands",
+      "value": "2025NL",
+      "tags": [
+        "historical",
+        "international",
+        "recent"
       ]
     },
     {
