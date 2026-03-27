@@ -283,11 +283,19 @@ $("#submitMod").click(function() {
         var client = new XMLHttpRequest();
         client.open('GET', "../static/mods/" + $("#modSelect")[0].value + "_init.html");
         client.onreadystatechange = function() {
-            console.log(client.responseText)
-            if (!e.readyToLoadCode1 && client.responseText.length > 0) {
-                evaluate(client.responseText)
-                e.readyToLoadCode1 = true;
+            if (client.readyState !== XMLHttpRequest.DONE) {
+                return;
             }
+
+            if (client.status >= 200 && client.status < 300) {
+                if (!e.readyToLoadCode1 && client.responseText.length > 0) {
+                    evaluate(client.responseText)
+                    e.readyToLoadCode1 = true;
+                }
+                return;
+            }
+
+            console.error("Failed to load mod init script:", client.status, $("#modSelect")[0].value);
         }
         client.send();
         diff_mod = true

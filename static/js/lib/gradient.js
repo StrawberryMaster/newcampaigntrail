@@ -23,6 +23,18 @@ var _interpolateColor = function(color1, color2, factor) {
     if (arguments.length < 3) {
         factor = 0.5;
     }
+    // some mods may provide invalid or missing color_hex strings
+    // fall back to neutral colors instead of throwing and breaking question flow
+    if (!Array.isArray(color1) || color1.length < 3) {
+        color1 = [255, 255, 255];
+    }
+    if (!Array.isArray(color2) || color2.length < 3) {
+        color2 = [255, 255, 255];
+    }
+    if (!Number.isFinite(factor)) {
+        factor = 0.5;
+    }
+
     var result = color1.slice();
     for (var i = 0; i < 3; i++) {
         result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));

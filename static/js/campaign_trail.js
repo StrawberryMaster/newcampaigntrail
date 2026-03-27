@@ -1846,10 +1846,19 @@ function divideElectoralVotesProp(e, t) {
                                 var client = new XMLHttpRequest();
                                 client.open('GET', "../static/mods/" + theorId + ".html");
                                 client.onreadystatechange = function() {
-                                    evaluate(client.responseText) // eval later
-                                    let e = A(2);
+                                    if (client.readyState !== XMLHttpRequest.DONE) {
+                                        return;
+                                    }
 
-                                    oFunc(e)
+                                    if (client.status >= 200 && client.status < 300) {
+                                        evaluate(client.responseText) // eval later
+                                        let e = A(2);
+
+                                        oFunc(e)
+                                        return;
+                                    }
+
+                                    console.error("Failed to load mod code 2:", client.status, theorId);
                                 }
                                 client.send();
                                 endingUrl = "../static/mods/" + theorId + "_ending.html"
@@ -1859,7 +1868,13 @@ function divideElectoralVotesProp(e, t) {
                                     var client2 = new XMLHttpRequest();
                                     client2.open('GET', endingUrl);
                                     client2.onreadystatechange = function() {
-                                        important_info = client2.responseText
+                                        if (client2.readyState !== XMLHttpRequest.DONE) {
+                                            return;
+                                        }
+
+                                        if (client2.status >= 200 && client2.status < 300) {
+                                            important_info = client2.responseText
+                                        }
                                     }
                                     client2.send();
                                 } catch {
