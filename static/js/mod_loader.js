@@ -30,6 +30,16 @@ viewNormal();
 
 var selectElement = document.getElementById("modSelect");
 
+const toStaticPath = (path) => {
+    if (typeof path !== "string") {
+        return path;
+    }
+    if (path.startsWith("/static/")) {
+        return `..${path}`;
+    }
+    return path;
+};
+
 const add_favourite = (val) => {
     let favs = window.localStorage.getItem("favourites");
     favs = favs ?? "[]";
@@ -156,9 +166,10 @@ function loadSync(path) {
 let options;
 
 try {
-    options = loadSync("/static/json/mods.json");
+    options = loadSync("../static/json/mods.json");
 } catch (error) {
     console.error('Error:', error);
+    options = [];
 }
 
 
@@ -204,7 +215,7 @@ for (var i = 0; i < options.length; i++) {
             🔗
             <span class="tooltip_text">Copies a permanent mod link.</span>
         </div>
-        <img src='${opt.image ?? "/static/mod_icons/default_placeholder.png"}' class='widget_image'></img>
+        <img src='${toStaticPath(opt.image ?? "/static/mod_icons/default_placeholder.png")}' class='widget_image'></img>
         <br>
         <h3>${opt.label}</h3>
         <span>Tags: ${opt.tags.join(", ")}</span><br>
@@ -220,7 +231,7 @@ for (var i = 0; i < options.length; i++) {
 
 $("#mod_loader_overlay_block").click(()=>{
     $("#modLoadReveal").click();
-    changeFavicon("/static/34starcircle-2.png");
+    changeFavicon("../static/34starcircle-2.png");
     document.body.style.overflow = '';
 });
 
@@ -294,9 +305,9 @@ let selection_click = () => {
 
     let icon = options.find(f=>f.value === $("#modSelect").val()).image;
     if (icon) {
-        changeFavicon(icon);
+        changeFavicon(toStaticPath(icon));
     } else {
-        changeFavicon("/static/34starcircle-2.png");
+        changeFavicon("../static/34starcircle-2.png");
     }
 
     widgets.forEach(f => f.classList.remove("selected_widget"));
