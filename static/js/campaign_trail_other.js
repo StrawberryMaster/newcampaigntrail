@@ -304,6 +304,7 @@ musicBox = document.getElementById("music_player")
 musicBox.style.display = ""
 
 var trackSel;
+window.campaignTrail_temp = window.campaignTrail_temp || {};
 e = campaignTrail_temp
 e.selectedSoundtrack = 0
 

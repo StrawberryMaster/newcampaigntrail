@@ -1,3 +1,5 @@
+window.campaignTrail_temp = window.campaignTrail_temp || {};
+
 e=campaignTrail_temp
 
 e.shining_info = [
